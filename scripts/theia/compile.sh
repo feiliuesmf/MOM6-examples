@@ -18,7 +18,7 @@ set MACHINE_ID=${platform}
 set COMPILE_OPTION=${MACHINE_ID}-intel.mk
 
 set compile_FMS=1
-set compile_ocean_only=0
+set compile_ocean_only=1
 set compile_MOM6_SIS2=1
 ###############################
 if ( ${compile_FMS} == 1 ) then 
@@ -66,7 +66,7 @@ echo "====================================================="
  ../../../../src/mkmf/bin/list_paths ./ ../../../../src/MOM6/{config_src/dynamic,pkg/CVMix-src/src/shared,config_src/solo_driver,src/{*,*/*}}
 
  echo "generating makefile ..."
- ../../../../src/mkmf/bin/mkmf -t ../../../../src/mkmf/templates/${COMPILE_OPTION} -o '-I../../shared/repro' -p 'MOM6 -L../../shared/repro  -lfms' -c "-Duse_libMPI -Duse_netcdf -DSPMD" path_names
+ ../../../../src/mkmf/bin/mkmf -t ../../../../src/mkmf/templates/${COMPILE_OPTION} -o '-I../../shared/repro' -p 'MOM6 -L../../shared/repro  -lfms -L/apps/hdf5/1.8.14-intel/lib/' -c "-Duse_libMPI -Duse_netcdf -DSPMD" path_names
 
  echo "compiling MOM6 ocean only ..."
  make NETCDF=4 REPRO=1 MOM6 -j
